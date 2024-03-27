@@ -9,8 +9,14 @@ public class SpringDemo {
 
     public static void main(String[] args) {
 
-        var container = new AnnotationConfigApplicationContext(PACKAGE_FOR_SCAN);
-        System.out.println(container.getBean(ConnectionPool.class));
+//        Without closing the bean container no destroy method will be called on singleton beans
+        try (var container = new AnnotationConfigApplicationContext(PACKAGE_FOR_SCAN)) {
+
+            System.out.println(container.getBean(ConnectionPool.class));
+
+
+
+        }
 
 
     }
