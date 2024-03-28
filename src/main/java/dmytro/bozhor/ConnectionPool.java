@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConnectionPool {
 
-    @PostConstract
+//    @PostConstract
     public void init(){
         System.out.println("Connection pool initialization");
     }
 
-    @PreDestroy
+//    @PreDestroy
     public void destroy(){
         System.out.println("Connection pool destroy");
     }
