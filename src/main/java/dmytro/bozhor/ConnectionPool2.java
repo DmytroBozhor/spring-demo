@@ -8,23 +8,23 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Getter
-public class ConnectionPool {
+public class ConnectionPool2 {
 
     @InjectDummy
     private String dummy;
 
-    public ConnectionPool() {
-        System.out.println("Connection pool constructor invocation");
+    public ConnectionPool2() {
+        System.out.println("Connection pool 2 constructor invocation");
     }
 
     @PostConstruct
     public void init(){
-        System.out.println("Connection pool initialization");
+        System.out.println("Connection pool 2 initialization");
     }
 
     @PreDestroy
     public void destroy(){
-        System.out.println("Connection pool destroy");
+        System.out.println("Connection pool 2 destroy");
     }
 
 }

@@ -12,9 +12,10 @@ public class SpringDemo {
 //        Without closing the bean container no destroy method will be called on singleton beans
         try (var container = new AnnotationConfigApplicationContext(PACKAGE_FOR_SCAN)) {
 
-            System.out.println(container.getBean(ConnectionPool.class));
+            var connectionPoolBean = container.getBean(ConnectionPool.class);
+            System.out.println("Connection pool bean obtained");
 
-
+            System.out.println(connectionPoolBean.getDummy());
 
         }
 
