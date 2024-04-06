@@ -1,5 +1,7 @@
 package dmytro.bozhor.bpp;
 
+import dmytro.bozhor.ConnectionPool;
+import dmytro.bozhor.Proxyable;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -8,10 +10,13 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.Arrays;
 
 @Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
+//@Order(Ordered.HIGHEST_PRECEDENCE)
 public class DummyPostProcessor implements BeanPostProcessor {
 
     @Override
@@ -26,6 +31,16 @@ public class DummyPostProcessor implements BeanPostProcessor {
 
 
         return bean;
+    }
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        return Proxy.newProxyInstance(ConnectionPool.class.getClassLoader(), new Class[]{Proxyable.class}, (proxy, method, args) -> {
+            System.out.println("Proxy starts");
+            var object = method.invoke(bean, args);
+            System.out.println("Proxy ends");
+            return object;
+        });
     }
 
     @SneakyThrows
