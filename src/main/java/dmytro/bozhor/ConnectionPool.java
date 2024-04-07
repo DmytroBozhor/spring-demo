@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Getter
-public class ConnectionPool implements Proxyable {
+public class ConnectionPool {
 
     @InjectDummy
     private String dummy;
@@ -18,16 +18,16 @@ public class ConnectionPool implements Proxyable {
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         System.out.println("Connection pool initialization");
     }
 
     @PreDestroy
-    public void destroy(){
+    public void destroy() {
         System.out.println("Connection pool destroy");
     }
 
-    public void printHello(){
+    public void printHello() {
         System.out.println("Hello from connection pool");
     }
 
